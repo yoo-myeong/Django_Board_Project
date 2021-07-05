@@ -2,6 +2,7 @@ from django.shortcuts import render
 from .models import Question, Answer
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from .forms import QuestionForm
 
 def index(request):
     """
@@ -29,3 +30,10 @@ def answer_create(request, question_id):
     answer.save()
 
     return redirect('pybo:detail', question_id=question.id)
+
+def question_create(request):
+    """
+    pybo 질문등록
+    """
+    form = QuestionForm()
+    return render(request, 'pybo/question_form.html', {'form': form})
